@@ -1,0 +1,28 @@
+{% extends "messenger_layout.html" %}
+{% block body %}
+    <form action="" method=post class="form-horizontal" >
+    <h2>{{nick_name}}님에게 쪽지보내기</h2>
+    <div class="control-group">
+        <div class="controls">
+          <label for="title">쪽지제목</label><input type="text" id="mess_title" name="mess_title" class="form-control"
+            placeholder="메시지를 입력해주세요" required>
+        </div><br>
+    </div>
+
+
+    <div class="control-group">
+        <div class="controls">
+            <label for="body">쪽지 내용</label>
+            <textarea name="mess_body" id="mess_body" style="width: 100%; height: 10em" class="form-control" placeholder="욕설 및 비방 등 금지" required></textarea>
+        </div>
+    </div><br>
+
+<br>
+      <div style="float: right;">
+        <button type="submit" class="btn btn-primary">쪽지보내기</button>
+      </div>
+
+  </form>
+
+
+{% endblock %}

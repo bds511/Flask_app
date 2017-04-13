@@ -1,0 +1,111 @@
+{% extends "index.html" %}
+{% block view_body %}
+
+
+<h1> {{view_contents.title}}</h1>
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-user" > </span>
+    <a href="#"  data-toggle="popover" data-trigger="focus"
+                   data-content="<ul><li><a href='/user/user_info/{{view_contents.user_num}}'>회원정보</a></li><li><a href='/send_message/{{view_contents.user_num}}'>메세지보내기</a></li><li><a href={{url_for('index', search_type='nick_name', q=view_contents.nick_name)}}>닉네임으로 검색</a></li></ul>"
+                   data-html="true">{{view_contents.nick_name}} </a>
+
+
+
+    <span class="glyphicon glyphicon-calendar"></span> {{view_contents.date}} 추천:{{view_contents.good}} 비추천:{{view_contents.bad}}</h5>
+<br><br>
+{{view_contents.body | safe}}
+
+<script type=text/javascript>
+  $(function() {
+      $('a#good').bind('click', function () {
+          $.getJSON($SCRIPT_ROOT + '/good/{{view_contents.number}}', function(data){$('#good_results').text(data.result);
+          $('#bad_results').text(data.results);
+          })
+      });
+      $('a#bad').bind('click', function () {
+          $.getJSON($SCRIPT_ROOT + '/bad/{{view_contents.number}}', function(data){$('#bad_results').text(data.results);
+          $('#good_results').text(data.result);
+          })
+      });
+  });
+</script>
+
+<br>
+      <div style="float: right;">
+      <a href="/"> <button type="button" class="btn btn-default" style="border-style: solid;">목록</button> </a>
+
+          {% if session['user_num'] %}
+          {% if session['user_num'] != view_contents.user_num %}
+          <a href=# id=good><button type="button" id="good_results" class="btn bk-bs-btn-default">{{view_contents.good}}</button>추천</a>
+          <a href=# id=bad><button type="button" id="bad_results" class="btn bk-bs-btn-default">{{view_contents.bad}}</button>비추천</a>
+          {% endif %}{% endif %}
+         {% if session['user_num'] == view_contents.user_num %}
+          <a href="{{url_for('index', view_number=view_number, mode="fix", page=number, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-primary">수정하기</button></a>
+          <a href="{{url_for('index', view_number=view_number, mode="delete", page=number, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-warning">삭제하기</button></a>
+         {% endif %}
+
+      </div>
+
+
+
+<br><br><br>
+
+    {% if comments %}
+<div class="panel-group" id="accordion" >
+<table class = "table table-hover" style="width: 100%">
+    <tr>
+        <th style=""> 작성자</th>
+        <th style="width: 70%">댓글</th>
+        <th>작성일</th>
+    </tr>
+
+    {% for i in comments %}
+    {% if i.parent_comment_num==None or i.parent_comment_num == 0 %}
+     <tr>
+        <td>{{i.nick_name}}</td>
+        <td>{{i.comment}}
+            {% if session['user_num'] == i.user_num %}
+                <a href="{{url_for('index', comment_num= i.comment_num, view_number=view_number, mode="del_comment", page=number, type=type, search_type=search_type, q=q)}}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
+            {%if session['user_num'] %} <a href="#{{i.comment_num}}th_collapse" data-parent="#accordion" data-toggle="collapse" data-target="#{{i.comment_num}}th_collapse"  style="font-size: small" > 댓글쓰기 </a>
+
+            <div id="{{i.comment_num}}th_collapse" class="collapse" >
+                <form action="{{url_for('index', view_number=view_number, mode='commenting', page=number, type=type, search_type=search_type, q=q)}}" method=post class="form-horizontal">
+      <input type="text" name="comment" style="width: 70%; margin-left: 2em; margin-right: 2em"><input class="hidden" name ="parent_comment_num" value="{{i.comment_num}}">
+                <button type="submit" class="btn btn-primary">댓글쓰기</button> </form>
+            </div>
+            {% endif %}
+
+        </td>
+
+        <td>{{i.date}}</td>
+    </tr>
+        {% for j in comments %}
+            {% if j.parent_comment_num == i.comment_num %}
+                <tr style="background-color: #9acfea;" >
+                <td>{{j.nick_name}}</td>
+                <td>{{j.comment}}</td>
+                <td>{{j.date}}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endfor %}
+</table>
+</div>
+
+    {% else %}
+
+    <p style="text-align: center">첫번째 댓글을 다세요^_^</p>
+    {% endif %}
+{% if session['user_num'] %}
+  <form action="{{url_for('index', view_number=view_number, mode="commenting", page=number, type=type, search_type=search_type, q=q)}}" method=post class="form-horizontal">
+      <label for="comment">댓글쓰기 </label><input type="text" id="comment" name="comment" style="width: 70%; margin-left: 2em; margin-right: 2em"> <input type="hidden" name="parent_comment_num" value="0">
+  <button type="submit" class="btn btn-primary">댓글쓰기</button>
+
+  </form>
+
+<br><br>
+{% endif %}
+
+
+{% endblock %}

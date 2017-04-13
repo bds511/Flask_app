@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+
+
+    <style>
+        div.inbox {
+            padding :10px 20px 10px 20px;
+            border-color: gainsboro; border-width: medium; border-style: solid;
+            font-weight: bold; text-align : left;
+            margin: 0 0 0 0;
+        }
+        span.leftbox {display: inline-block; width: 10%; font-weight: bold; vertical-align: top;
+        }
+        span.rightbox {width: 88%; display: inline-block;}
+        hr {border-width: medium;}
+        input.form-control {height : auto;}
+
+
+    </style>
+    <title>Title</title>
+</head>
+<body style="width: 95%; margin: 0 auto;">
+    <div class="inbox" style="background-color: gainsboro" ><h3>갤러리글쓰기</h3></div>
+    <div class="inbox"><span class="leftbox">옵션 </span><label><input type=checkbox>공지</label><label><input type=checkbox>비밀글</label><label><input type=checkbox>답변메일받기</label>
+    <hr><span class="leftbox">분류</span>
+        <span class="rightbox">
+        <select class ="form-control" id="search_type" name="whatwhat" style="height: 3em; width: 100%; background-color: gainsboro">
+            <option value="웃긴글">웃긴글</option>
+        <option value="노잼글">노잼글</option>
+        <option value="똥글">똥글</option>
+        </select></span>
+        <hr>
+        <span class="leftbox">제목 </span><span class="rightbox"><input type="text" class="form-control" id="subject"></span>
+        <hr>
+        <span class="leftbox">내용 </span><span class="rightbox">
+            <div id="summernote"><p>Hello Summernote</p></div>
+            <script>
+            $(document).ready(function() {
+            $('.summernote').summernote(
+                {height: 500}
+            );
+            });
+            </script>
+
+</span>
+        <hr>
+        <span class="leftbox">링크 </span><span class="rightbox"><input type="file" class="form-control"></span>
+        <hr>
+        <span class="leftbox">파일 </span><span class="rightbox"><input type="file" class="form-control"></span>
+    </div>
+    <div class="inbox" style="background-color: gainsboro; text-align: center"; >
+        <button type=button class="btn btn-danger" style="margin:auto;">작성완료</button>
+        <button type=button class="btn btn-default" style="margin:auto;">취소</button>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

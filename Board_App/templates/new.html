@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session['nick_name'] %}
+  <form action="" method=post class="form-horizontal">
+    <h2>게시판 글쓰기</h2>
+        <div class="control-group">
+            <label for="board_num">게시판선택</label>
+            <select class="form-control" id="board_num" name="board_num">
+                {% for i in g_board_list[1:]%}
+                <option value="{{i.board_num}}">{{i.board_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+
+    <div class="control-group">
+        <div class="controls">
+          <label for="title">글제목</label><input type="text" id="title" name="title" class="form-control"
+            placeholder="글제목" value="{{ request.form.title }}"
+            required>
+        </div><br>
+    </div>
+
+
+    <div class="control-group">
+        <div class="controls">
+            <label for="body">글내용</label>
+            <textarea class="summernote" name="body" id="body">{{ request.form.body }}</textarea>
+        </div>
+    </div><br>
+
+<br>
+      <div style="float: right;">
+          <a href="/ "> <button type="button" class="btn btn-default" style="border-style: solid;">목록</button></a>
+        <button type="submit" class="btn btn-primary">글쓰기</button>
+      </div>
+
+  </form>
+{% else %}
+    <h3> 로그인해주시기 바랍니다. </h3>
+          <a href="/"> <button type="button" class="btn btn-default" style="border-style: solid;">목록으로</button></a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type=text/javascript>
+$(function() {
+    $('button#checking').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/id_checker', {
+        a: $('input[name="join_id"]').val()
+      }, function(data) {
+        $("#result").text(data.id_checking);
+      });
+      return false;
+    });
+  });
+ function validate(){
+         var emailID = document.join_form.email.value;
+         var passwords = document.join_form.join_password.value;
+         var idchecker = document.getElementById('result').innerHTML;
+         atpos = emailID.indexOf("@");
+         dotpos = emailID.lastIndexOf(".");
+
+         if (atpos < 1 || ( dotpos - atpos < 2 ))
+         {
+            document.join_form.email.focus();
+            document.getElementById("No_email").innerHTML = "올바른 이메일을 입력하시오 ex)right_email@example.com";
+            return(false);
+         }
+         if (passwords.length < 7 )
+         {
+             document.join_form.join_password.focus();
+             document.getElementById("No_password").innerHTML = "7자리 이상의 비밀번호를 입력하세요";
+             return(false);
+         }
+         if (idchecker != "만들 수 있는 ID"){
+             document.join_form.join_password.focus();
+             document.getElementById("result").innerHTML = "아이디 중복체크를 해주세요";
+             return(false);
+         }
+         return(true);
+        }
+</script>
+
+
+  <form action="" name="join_form" method=post class="form-horizontal" onsubmit="return(validate());">
+    <h2>회원가입 하기 </h2>
+    <table class="table table-hover">
+    <div class="control-group">
+    <tr>
+        <div class="controls">
+            <td><label for="id">아이디</label></td>
+        <td>
+            <input type="text" id="id" name="join_id" class="input-xlarge"
+            placeholder="아이디" required>
+            <button type="button" id='checking'>중복체크</button><span id="result"></span>
+        </td>
+        </div></tr>
+    </div>
+        <tr>
+    <div class="control-group">
+        <div class="controls">
+            <td><label for="password">비밀번호</label></td>
+            <td>
+            <input type="password" id="password" name="join_password" class="input-xlarge"
+            placeholder="비밀번호" value="{{ request.form.password }}"
+            required><span id="No_password"></span></td>
+        </div>
+    </div></tr>
+
+        <tr>
+    <div class="control-group">
+        <div class="controls">
+            <td><label for="nick_name">닉네임</label></td><td><input type="text" id="nick_name" name="nick_name" class="input-xlarge"
+            placeholder="닉네임" required>
+        </div></td>
+    </div>
+        </tr>
+
+    <tr>
+    <div class="control-group">
+        <div class="controls">
+            <td><label for="email">이메일주소</label></td>
+            <td><input type="text" id="email" name="email" class="input-xlarge"
+            placeholder="이메일" value="{{ request.form.email }}"
+            required><span id="No_email"></span>
+            </td>
+        </div></tr>
+    </div>
+    </table>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-success">회원가입</button>
+        </div>
+    </div>
+  </form>
+{% endblock %}

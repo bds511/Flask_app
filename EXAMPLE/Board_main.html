@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+      button.btn-default {border-style: none;}
+      button.btn-default.sbt {
+        border-style : solid; border-radius: 0; color: dodgerblue;
+      }
+      input[type=text]:focus {
+        background-color: gainsboro;
+      }
+    </style>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 게시판</title>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div style="width: 95%; margin: auto;">
+    <div><h3>공지사항</h3></div>
+    <br>
+    <div>
+      <button type="button" class="btn btn-primary">전체</button>
+      <button type="button" class="btn btn-default">분류1</button>
+      <button type="button" class="btn btn-default">분류2</button>
+      <button type="button" class="btn btn-default">분류3</button>
+      <br><br>
+      <h5>Total 102건 1 페이지
+      <div style="float: right;">
+      <button type="button" class="btn btn-warning" >RSS</button>
+      <button type="button" class="btn btn-danger" >관리자</button>
+      <button type="button" class="btn btn-primary" >글쓰기</button></div>
+      </h5> 
+    </div>
+    <br>
+    <table class="table" style="border-bottom-style: solid; border-bottom-color: gainsboro;">
+      <tr style="background-color: #2b669a; color: white;">
+        <th>번호</th>
+        <th><input type="checkbox" name="selection" value="all"></th>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>날짜</th>
+        <th>조회</th>
+        <th>추천</th>
+        <th>비추천</th>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우리는 곳이 반짝jjjj이는 원대하고 주는tt 웅대한 봄yres바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우리는 곳tt이 반짝이는 원대하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우yy리는 곳이 반짝이는 원대하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우리는 곳이 uuu반짝이는 원대uu하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고ggggg 우d리는 sta곳ggggg이 반짝이는 원대하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우리는 곳이 반짝이는 원대하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우리는 곳이 반짝이는 원대하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>95</td>
+        <td><input type="checkbox" name="selection" value="all"></td>
+        <td>석가는 작고 우리는 곳이 반짝이는 원대하고 주는 웅대한 봄바람이다. 뜨고, 사랑의 때에 군영과 얼음 이가...</td>
+        <td>최고관리자</td>
+        <td>10-26</td>
+        <td>32</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+    </table>
+
+    <div>
+      <button type="button" class="btn btn-danger" ><span class="glyphicon glyphicon-floppy-remove">선택삭제</span></button>
+      <button type="button" class="btn btn-danger" ><span class="glyphicon glyphicon-copy">선택복사</span></button>
+      <button type="button" class="btn btn-danger" ><span class="glyphicon glyphicon-paste">선택이동</span></button>
+      <div style="float: right;">
+        <button type="button" class="btn btn-default" style="border-style: solid;">목록</button>
+        <button type="button" class="btn btn-primary">글쓰기</button>
+      </div>
+    </div>
+    <br>
+    <div class="btn-group" style="margin: 0 auto; display: block; width: 500px">
+      <button type="button" class="btn btn-primary" style="border-radius: 0%;">1</button>
+      <button type="button" class="btn btn-default sbt">2</button>
+      <button type="button" class="btn btn-default sbt">3</button>
+      <button type="button" class="btn btn-default sbt">4</button>
+      <button type="button" class="btn btn-default sbt">5</button>
+      <button type="button" class="btn btn-default sbt">6</button>
+      <button type="button" class="btn btn-default sbt">7</button>
+      <button type="button" class="btn btn-default sbt">8</button>
+      <button type="button" class="btn btn-default sbt">9</button>
+      <button type="button" class="btn btn-default sbt">10</button>
+      <button type="button" class="btn btn-default sbt">다음</button>
+      <button type="button" class="btn btn-default sbt">맨끝</button>
+    </div>
+    <br><br>
+    <div style="margin: 0 auto; display: block; width: 300px">
+    <form stlye>
+      <select id="search_type" name="whatwhat" style="height: 2em;">
+        <option value="제목">제목</option>
+        <option value="작성자">작성자</option>
+        <option value="내용">내용</option>
+      </select>
+      <input type="text" id="search_content" name="search_content" value="" style="height: 2em">
+      </select>
+      <button type="button" class="btn btn-default" style="border-style: solid;">검색</button>
+    </form>
+    </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

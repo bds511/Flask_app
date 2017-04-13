@@ -1,0 +1,22 @@
+{% extends "messenger_layout.html" %}
+{% block body %}
+
+<h1> 메시지 보기</h1>
+<table class = "table table-hover" style="width: 100%">
+    <tr>
+        {% if number==0 %}<th>보낸이</th> {% else %} <th>받는이</th>{% endif %}
+        <th style="width: 60%">제목</th>
+        <th>발송날짜</th>
+        <th>읽었나?</th>
+    </tr>
+    {% for i in msg_to_read: %}
+        <tr>
+            {% if number==0 %}<td>{{i.by_whom_nick_name}}</td> {% else %}<td>{{i.to_whom_nick_name}}</td>{% endif %}
+            <td><a href="/read_message/{{i.mess_num}}"> {{i.mess_title}} </a> </td>
+            <td>{{i.send_date}}</td>
+            <td>{% if i.read==True %} O {% else %} X {% endif %}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

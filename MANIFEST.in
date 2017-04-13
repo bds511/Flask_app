@@ -1,0 +1,2 @@
+graft Board_App/templates
+graft Board_App/static

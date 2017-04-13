@@ -1,0 +1,16 @@
+{% extends "messenger_layout.html" %}
+{% block body %}
+<h1>{{msg.mess_title}}</h1>
+
+<h5 style="font-weight: bold">{% if msg.to_whom == session['user_num'] %} {{msg.by_whom}}님이 보낸 메시지 {% else %} {{msg.to_whom}}님께 보낸 메시지 {% endif%} <br> 보낸 날짜  : {{msg.send_date}}</h5>
+<br>
+{{msg.mess_body}}
+
+
+<br><br>
+<div style="float :right">
+    {% if msg.to_whom == session['user_num'] %} <a href="/send_message/{{msg.by_whom}}"> <button class="btn btn-primary">답장하기</button></a><button class="btn btn-danger">삭제하기</button> <a href="/message_index/0"><button class="btn btn-primary">목록으로</button></a>{% else %}<a href="/send_message/{{msg.to_whom}}" <button class="btn btn-primary">메시지보내기</button> <a href="/message_index/1"><button class="btn btn-primary">목록으로</button></a>{% endif %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% block view_body %}{% endblock %}
+
+
+
+<table class = "table table-hover" style="width: 100%">
+    <tr>
+        <th style="width: 5%">#</th>
+        <th style="width: 60%">제목</th>
+        <th>작성자</th>
+        <th>날짜</th>
+        <th>조회수</th>
+        <th>추천/비추천</th>
+    </tr>
+    {%- for i in contents: %}
+        <tr>
+            <td>{{i.number}}
+            </td>
+            <td><a href="{{url_for('index', mode="view", view_number = i.number, page=number, type=type, search_type=search_type, q=q)}}"> {{i.title}}</a></td>
+            {% if session['user_num'] == i.user_num %}<td><a href="/user/user_info/{{i.user_num}}" style="font-weight: bolder; color: #204d74" >{{i.nick_name}}</a></td>{% else %}
+            <td><a href="#"  data-toggle="popover" data-trigger="focus"
+                   data-content="<ul><li><a href='/user/user_info/{{i.user_num}}'>회원정보</a></li><li><a href='/send_message/{{i.user_num}}'>메세지보내기</a></li><li><a href={{url_for('index', search_type='nick_name', q=i.nick_name)}}>닉네임으로 검색</a></li></ul>"
+                   data-html="true">{{i.nick_name}}</a></td>{% endif %}
+            <td>{{i.date}}</td>
+            <td>{{i.hit}}</td>
+            <td>{{i.good}}/{{i.bad}}</td>
+        </tr>
+    {%- endfor %}
+
+</table>
+<br>
+      <div style="float: right;">
+          <a href="/board"> <button type="button" class="btn btn-default" style="border-style: solid;">목록</button></a>
+          {% if session['user_num'] %}<a href="{{url_for('write')}}"> <button type="button" class="btn btn-primary">글쓰기</button></a>{% endif %}
+      </div>
+
+
+    <br><br>
+
+
+
+    <div class="btn-group" style="margin: auto; display: block; text-align: center">
+        <a href="{{url_for('index', board_num=board_num, page=1, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-default sbt">첫글</button></a>
+        {% if (number-5)<1 %}
+        <a href="{{url_for('index', board_num=board_num, page=1, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-default sbt">이전</button></a>
+        {% else %}
+        <a href="{{url_for('index', board_num=board_num, page=number-5, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-default sbt">이전</button></a>
+        {% endif %}
+        {% for i in range(min_num, max_num+1) %}
+            {% if i==number %}
+            <a href="{{url_for('index', board_num=board_num, page=i, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-primary">{{i}}</button></a>
+            {% else %}
+            <a href="{{url_for('index', board_num=board_num, page=i, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-default sbt">{{i}}</button></a>
+        {% endif %}
+        {% endfor %}
+        <a href="{{url_for('index', board_num=board_num, page=number+5, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-default sbt">다음</button></a>
+
+        <a href="{{url_for('index', board_num=board_num, page=last_num, type=type, search_type=search_type, q=q)}}"><button type="button" class="btn btn-default sbt">마지막</button></a>
+    </div>
+
+
+
+
+
+<br>
+<form action="/board?board_num={{board_num}}">
+    <div class="input-group" style="width: 30em; margin: 0 auto">
+        <input type="hidden" name="board_num" value={{board_num[0]}}>
+        <select class="form-control" id="search_type" name="search_type" style="display: inline; width: 10em">
+            <option value="title">글제목</option>
+            <option value="body">글내용</option>
+            <option value="title_body">글제목+내용</option>
+            <option value="nick_name">작성자</option>
+        </select>
+    <input type="text" class="form-control" id="q" name="q" placeholder="Search" style="display: inline; width: 15em">
+
+      <button class="btn btn-default" type="submit">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+
+  </div>
+</form>
+
+{% endblock %}

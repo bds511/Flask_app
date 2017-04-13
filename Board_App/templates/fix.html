@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+         {% if session['user_num'] == contents.user_num %}
+  <form action="" method=post class="form-horizontal">
+    <h2>글수정하기</h2>
+    <div class="control-group">
+        <div class="controls">
+          <label for="title">글제목</label><input type="text" id="title" name="title" class="form-control"
+            placeholder="글제목" value="{{ contents.title }}"
+            required>
+        </div><br>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <label for="body">글내용</label>
+            <textarea class="summernote" id = "body" name="body">{{ contents.body }}</textarea>
+
+        </div>
+    </div><br>
+
+
+<br>
+      <div style="float: right;">
+          <a href="/"> <button type="button" class="btn btn-default" style="border-style: solid;">목록</button></a>
+          <button type="submit" class="btn btn-primary">수정하기</button>
+      </div>
+  </form>
+{% else %}
+    <h2> 글 {{contents.title}}의 작성자가 아니십니다.</h2>
+          <a href="/"> <button type="button" class="btn btn-default" style="border-style: solid;">목록으로</button></a>
+{% endif %}
+{% endblock %}
